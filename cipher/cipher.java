@@ -2,11 +2,11 @@ package cipher;
 
 public abstract class cipher {
 
-  protected String cryptoText = "";
+  protected char[] cryptoText;
 
-  public abstract String encrypt(String maessage);
+  public abstract char[] encrypt(char[] message);
 
-  public String getCriptoText() {
+  public char[] getCriptoText() {
     return cryptoText;
   }
 }
