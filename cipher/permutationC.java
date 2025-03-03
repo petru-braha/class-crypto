@@ -34,23 +34,23 @@ public class permutationC extends cipher {
     cryptoText = message.clone();
     for (int i = 0; i < message.length; i += rankArray.length) {
 
-      //todo check if correct
       int count = i + rankArray.length;
       if (count > message.length) {
-        final int INVALID = -1;
-        int indexMessage = i;
+
+        final char INVALID = '\0';
         char[] values = new char[rankArray.length];
-        for (int index = i; index < count; index++) {
-          if (indexMessage >= count)
-            break;
-          values[i + rankArray[index - i]] = message[index];
+        for (int index = 0; index < values.length; index++) {
+          if (i + index >= message.length)
+            values[rankArray[index]] = INVALID;
+          else
+            values[rankArray[index]] = message[i + index];
         }
 
-        indexMessage = i;
-        for (int index = i; index < count; index++)
+        int indexMessage = i;
+        for (int index = 0; index < values.length; index++)
           if (INVALID != values[index])
             cryptoText[indexMessage++] = values[index];
-        break;
+        return cryptoText;
       }
 
       for (int index = i; index < count; index++)
@@ -58,6 +58,6 @@ public class permutationC extends cipher {
           cryptoText[i + rankArray[index - i]] = message[index];
     }
 
-    return cryptoText.clone();
+    return cryptoText;
   }
 }

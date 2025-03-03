@@ -68,8 +68,8 @@ public class source {
 
   private static void testAfn() {
 
-    final int a = g(Integer.MIN_VALUE, Integer.MAX_VALUE),
-        b = g(Integer.MIN_VALUE, Integer.MAX_VALUE);
+    final int a = g(0, message.length),
+        b = g(0, message.length);
     affineC encryptor = new affineC(a, b);
 
     char[] result = encryptor.encrypt(message);
@@ -79,14 +79,14 @@ public class source {
 
   private static void testVig() {
 
-    final int n = g(Integer.MIN_VALUE, Integer.MAX_VALUE);
+    final int n = g(1, message.length);
     int[] key = new int[n];
     for (int i = 0; i < n; i++)
       key[i] = g(0, language.enL.length());
     vigenereC encryptor = new vigenereC(key);
 
     char[] result = encryptor.encrypt(message);
-    System.out.print("keyAfn:");
+    System.out.print("keyVig:");
     for (int i = 0; i < n; i++)
       System.out.printf(" %d", key[i]);
     System.out.print(", cripto-text: ");
