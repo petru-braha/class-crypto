@@ -10,16 +10,23 @@ public class permutationC extends cipher {
 
   public permutationC(final char[] k) {
 
-    int[] sortedUnique = new int[k.length];
-    sortedUnique = Arrays.stream(sortedUnique).distinct().sorted().toArray();
+    int[] sortedRanks = new int[k.length];
+    for (int i = 0; i < k.length; i++)
+      sortedRanks[i] = (int) (k[i] - 'a');
+
+    rankArray = Arrays.stream(sortedRanks).distinct().toArray();
+    sortedRanks = Arrays.stream(sortedRanks).distinct().sorted().toArray();
+
+    if (k.length != sortedRanks.length)
+      System.out.printf("permutationC - warning: %s\n",
+          "ignoring non-distinct elements");
 
     Map<Integer, Integer> rankMap = new HashMap<>();
-    for (int i = 0; i < sortedUnique.length; i++)
-      rankMap.put(sortedUnique[i], i);
+    for (int i = 0; i < sortedRanks.length; i++)
+      rankMap.put(sortedRanks[i], i);
 
-    rankArray = new int[sortedUnique.length];
-    for (int i = 0; i < sortedUnique.length; i++)
-      rankArray[i] = rankMap.get(sortedUnique[i]);
+    for (int i = 0; i < sortedRanks.length; i++)
+      rankArray[i] = rankMap.get(rankArray[i]);
   }
 
   public char[] encrypt(char[] message) {
@@ -27,12 +34,28 @@ public class permutationC extends cipher {
     cryptoText = message.clone();
     for (int i = 0; i < message.length; i += rankArray.length) {
 
+      //todo check if correct
       int count = i + rankArray.length;
-      if (count >= message.length)
-        count = message.length;
+      if (count > message.length) {
+        final int INVALID = -1;
+        int indexMessage = i;
+        char[] values = new char[rankArray.length];
+        for (int index = i; index < count; index++) {
+          if (indexMessage >= count)
+            break;
+          values[i + rankArray[index - i]] = message[index];
+        }
+
+        indexMessage = i;
+        for (int index = i; index < count; index++)
+          if (INVALID != values[index])
+            cryptoText[indexMessage++] = values[index];
+        break;
+      }
 
       for (int index = i; index < count; index++)
-        cryptoText[i + rankArray[index - i]] = message[index];
+        if (i + rankArray[index - i] < count)
+          cryptoText[i + rankArray[index - i]] = message[index];
     }
 
     return cryptoText.clone();

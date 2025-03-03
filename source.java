@@ -4,6 +4,7 @@ import cipher.language;
 import cipher.substitutionC;
 import cipher.permutationC;
 import cipher.affineC;
+import cipher.vigenereC;
 
 public class source {
 
@@ -42,15 +43,16 @@ public class source {
 
     char[] result = encryptor.encrypt(message);
 
+    System.out.printf("mapped: %s\n", language.enL);
     System.out.print("keySub: ");
     System.out.print(key);
-    System.out.print("\", cripto-text: ");
+    System.out.print(", cripto-text: ");
     System.out.println(result);
   }
 
   private static void testPrm() {
 
-    int n = g(5, 15);
+    int n = g(5, message.length);
     char[] key = new char[n];
     for (int i = 0; i < key.length; i++)
       key[i] = language.enL.charAt(g(0, language.enL.length()));
@@ -60,7 +62,7 @@ public class source {
 
     System.out.print("keyPrm: ");
     System.out.print(key);
-    System.out.print("\", cripto-text: ");
+    System.out.print(", cripto-text: ");
     System.out.println(result);
   }
 
@@ -72,6 +74,22 @@ public class source {
 
     char[] result = encryptor.encrypt(message);
     System.out.printf("keyAfn: %d %d, cripto-text: ", a, b);
+    System.out.println(result);
+  }
+
+  private static void testVig() {
+
+    final int n = g(Integer.MIN_VALUE, Integer.MAX_VALUE);
+    int[] key = new int[n];
+    for (int i = 0; i < n; i++)
+      key[i] = g(0, language.enL.length());
+    vigenereC encryptor = new vigenereC(key);
+
+    char[] result = encryptor.encrypt(message);
+    System.out.print("keyAfn:");
+    for (int i = 0; i < n; i++)
+      System.out.printf(" %d", key[i]);
+    System.out.print(", cripto-text: ");
     System.out.println(result);
   }
 
@@ -95,5 +113,6 @@ public class source {
     testSub();
     testPrm();
     testAfn();
+    testVig();
   }
 }
