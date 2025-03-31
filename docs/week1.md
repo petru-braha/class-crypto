@@ -23,7 +23,7 @@ d_k(alpha) = a^(-1)(alpha - b) mod 26
 
 15 * -3 mod 26 = -45 mod 26 = 26 * 3 - 45
 
-### brute force
+<br> brute force
 
 312 keys: k_1, ..., k_312
 decriptez cu fiecare pe rand - textul rezultat are sens? if yes => return
@@ -38,13 +38,13 @@ TEMA: investigati criptarea cu functii polinomiale patratice
 
 - message-recory solution - cand un adversar care nu afla neaparat cheia dar afla mesajul
 
-### scurgere de informatii
+<br> scurgere de informatii
 
 - vezi table cu probabilitati of english letters
 - vezi table cu frecvente of letters of the stolen message
 - faci sinapse
 
-###
+<br>
 
 - criptarea probabilista:
 - premiul turing criptezi o litera in mai multe feluri 
@@ -52,14 +52,14 @@ TEMA: investigati criptarea cu functii polinomiale patratice
 
 a trebuie sa fie coprim cu 26, daca nu inseamna ca scurgerea de informatii nu a functionat
 
-### 
+<br> 
 
 4a + b congruent 5 mod 26
 7a + b congruent 9 mod 26
 
 7a + 5 - 4a congruent 9 mod 26
 
-###
+<br>
 
 e_k(e) = r <=> e_k(4) = 17
 e_k(a) = d <=> e_k(0) = 3
@@ -71,7 +71,7 @@ b = 3
 4a congruent 14 mod 26
 4 nu este coprim cu 26 si nu este bun
 
-###
+<br>
 
 e_k(o) = d <=> e_k(14) = 3
 
@@ -109,7 +109,7 @@ IC => lungimea cheii - cea mai mare valoare - lungimea cheie buna
 pentru MIC(x, y)
 x, y texte in limbaje naturale
 
-###
+<br>
 
 pentru y_i caut valoarea shiftului
 oricare j din 0 pana la 25, calculam M
